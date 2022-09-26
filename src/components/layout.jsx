@@ -119,8 +119,8 @@ const user = {
 }
 
 const navigation = [
-  { name: 'Agencies', href: '/agencies/', current: window.location.href.indexOf('/agenc') > -1 },
-  { name: 'Categories', href: '/categories/', current: window.location.href.indexOf('/categor') > -1 },
+  { name: 'Agencies', href: '/agencies/', current: false },
+  { name: 'Categories', href: '/categories/', current: false },
 ]
 
 const userNavigation = [
