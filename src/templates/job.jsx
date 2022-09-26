@@ -56,8 +56,6 @@ export default function JobPage({ data }) {
   )
 
   const FormattedText = ({ heading, content }) => {
-    const clean_content = content.replace(/â/g, "'")
-    const content_array = clean_content.split('â¢')
     return (
       <div>
         {heading && (
@@ -65,12 +63,7 @@ export default function JobPage({ data }) {
             <h3 className="text-2xl font-semibold text-gray-900">{heading}</h3>
           </div>
         )}
-        <p className="leading-relaxed">{content_array[0]}</p>
-        {content_array.length > 1 && (
-          <ul className="list-disc mt-4 pl-4">
-            {content_array.slice(1).map((item, index) => <li key={index} className="mb-2">{item}</li>)}
-          </ul>
-        )}
+        <div className="leading-relaxed" dangerouslySetInnerHTML={{ __html: content }} />
       </div>
     )
   }
@@ -100,14 +93,14 @@ export default function JobPage({ data }) {
       </Helmet>
       <div className="grid grid-cols-3 gap-20">
         <div className="col-span-2">
-          <div className="flex flex-col gap-y-8">
+          <div className="flex flex-col gap-y-8 longform">
             {job?.posting_type === 'External' && <ExternalAlert />}
-            {job?.job_description && <FormattedText heading="Job Description" content={job.job_description} />}
-            {job?.minimum_qual_requirements && <FormattedText heading="Minimum Qualifications" content={job.minimum_qual_requirements} />}
-            {job?.residency_requirement && <FormattedText heading="Residency Requirement" content={job.residency_requirement} />}
-            {job?.preferred_skills && <FormattedText heading="Preferred Skills" content={job.preferred_skills} />}
-            {job?.additional_information && <FormattedText heading="Additional Information" content={job.additional_information} />}
-            {job?.to_apply && <FormattedText heading="How to Apply" content={job.to_apply} />}
+            {job?.job_description_html && <FormattedText heading="Job Description" content={job.job_description_html} />}
+            {job?.minimum_qual_requirements_html && <FormattedText heading="Minimum Qualifications" content={job.minimum_qual_requirements_html} />}
+            {job?.residency_requirement_html && <FormattedText heading="Residency Requirement" content={job.residency_requirement_html} />}
+            {job?.preferred_skills_html && <FormattedText heading="Preferred Skills" content={job.preferred_skills_html} />}
+            {job?.additional_information_html && <FormattedText heading="Additional Information" content={job.additional_information_html} />}
+            {job?.to_apply_html && <FormattedText heading="How to Apply" content={job.to_apply_html} />}
           </div>
         </div>
         <div className="flex flex-col gap-y-4">
@@ -169,7 +162,7 @@ export const query = graphql`
       job_description
       job_id
       minimum_qual_requirements
-      of_positions
+      number_of_positions
       post_until
       posting_date
       posting_type
@@ -184,5 +177,11 @@ export const query = graphql`
       to_apply
       work_location
       work_location_1
+      job_description_html
+      minimum_qual_requirements_html
+      residency_requirement_html
+      preferred_skills_html
+      additional_information_html
+      to_apply_html
     }
   }`

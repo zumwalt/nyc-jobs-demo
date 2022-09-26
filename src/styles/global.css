@@ -1,3 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.longform ul, .longform ol {
+  @apply pt-2;
+  @apply pl-4;
+}
+
+.longform ul {
+  @apply list-disc;
+}
+
+.longform ol {
+  @apply list-decimal;
+}
+
+.longform li {
+  @apply mb-2;
+}
+
+.longform li:first-letter {
+  @apply capitalize;
+}
