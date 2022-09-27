@@ -60,11 +60,7 @@ export default function SearchPage() {
                   </div>
                 )}
                 resultView={({ result, onClickLink }) => {
-                  console.log(result)
                   return (
-                    // <Link to={`/jobs/${kebabCase(result.business_title.raw)}-${result.job_id.raw}`} onClick={onClickLink}>
-                    //   <h4>{result.business_title.snippet}</h4>
-                    // </Link>
                     <li key={result.job_id.raw}>
                       <Link to={`/jobs/${kebabCase(result.business_title.raw)}-${result.job_id.raw}`} className="block hover:bg-gray-50">
                         <div className="px-4 py-4 sm:px-6">
@@ -77,10 +73,10 @@ export default function SearchPage() {
                                 <UsersIcon className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
                                 {result.agency.raw}
                               </p>
-                              <p className="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">
+                              {/* <p className="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">
                                 <MapPinIcon className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
                                 {result.work_location.raw}
-                              </p>
+                              </p> */}
                             </div>
                             <div className="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">
                               <CalendarIcon className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
