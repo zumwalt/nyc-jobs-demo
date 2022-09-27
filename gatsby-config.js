@@ -5,7 +5,7 @@ require("dotenv").config({
 module.exports = {
   siteMetadata: {
     title: `NYC Jobs`,
-    siteUrl: `https://www.yourdomain.tld`
+    siteUrl: `https://nyc-jobs-demo.vercel.app`
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -20,5 +20,6 @@ module.exports = {
         ignore: [`**/\.*`], // ignore files starting with a dot
       },
     },
+    `gatsby-plugin-sitemap`,
   ]
 };

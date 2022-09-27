@@ -1,0 +1,73 @@
+{
+  "properties": {
+    "business_title": {
+      "type": "text",
+      "fields": {
+        "suggest": {
+          "type": "search_as_you_type"
+        }
+      }
+    },
+    "full_time_part_time_indicator": {
+      "type": "text",
+      "fields": {
+        "keyword": {
+          "type": "keyword"
+        }
+      }
+    },
+    "posting_date": {
+      "type": "date"
+    },
+    "job_description": {
+      "type": "text"
+    },
+    "category": {
+      "type": "text",
+        "fields": {
+        "keyword": {
+          "type": "keyword"
+        }
+      }
+    },
+    "agency": {
+      "type": "text",
+        "fields": {
+        "keyword": {
+          "type": "keyword"
+        }
+      }
+    },
+    "division_work_unit": {
+      "type": "text",
+        "fields": {
+        "keyword": {
+          "type": "keyword"
+        }
+      }
+    },
+
+    "salary_range_from": {
+      "type": "float"
+    },
+    "salary_range_to": {
+      "type": "float"
+    },
+    "salary_frequency": {
+      "type": "text",
+      "fields": {
+        "keyword": {
+          "type": "keyword"
+        }
+      }
+    },
+    "title_classification": {
+      "type": "text",
+      "fields": {
+        "keyword": {
+          "type": "keyword"
+        }
+      }
+    }
+  }
+}

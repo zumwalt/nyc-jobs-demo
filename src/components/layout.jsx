@@ -40,8 +40,17 @@ const config = {
       },
       posting_date: {
         raw: {}
+      },
+      category: {
+        raw: {}
       }
     },
+    disjunctiveFacets: ["category.keyword","agency.keyword","division_work_unit.keyword"],
+    facets: {
+      "category.keyword": { type: "value" },
+      "agency.keyword": { type: "value" },
+      "divison_work_unit.keyword": { type: "value" }
+    }
   },
   autocompleteQuery: {
     results: {
