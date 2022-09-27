@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Link } from "gatsby"
+import { Link, Script } from "gatsby"
 import kebabCase from "lodash/kebabCase"
 import JobLayout from "../components/jobLayout"
 import { WithSearch, Results, PagingInfo, ResultsPerPage, Paging, Facet, Sorting } from "@elastic/react-search-ui"
@@ -198,4 +198,16 @@ export default function SearchPage() {
   )
 }
 
-
+export function Head() {
+  return (
+    <>
+      <title>Search Jobs | NYC Jobs</title>
+      <Script
+        id="analytics"
+        src={'./analytics.js'}
+        data-dsn={process.env.GATSBY_ELASTIC_BA_DSN}
+        defer
+      />
+    </>
+  )
+}

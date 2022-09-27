@@ -1,9 +1,10 @@
 import React from "react"
 import Helmet from "react-helmet"
-import { graphql } from "gatsby"
+import { graphql, Script } from "gatsby"
 import { ExclamationTriangleIcon, ArrowTopRightOnSquareIcon } from "@heroicons/react/20/solid"
 import kebabCase from "lodash/kebabCase"
 
+import CrawlerMetaTags from "../components/crawlerMetaTag"
 import JobLayout from "../components/jobLayout"
 
 export default function JobPage({ data }) {
@@ -185,3 +186,19 @@ export const query = graphql`
       to_apply_html
     }
   }`
+
+export function Head({ data }) {
+  const job = data.jobsJson
+  return (
+    <>
+      <title>{job.business_title} Job Posting | NYC Jobs</title>
+      <Script
+        id="analytics"
+        src={'./analytics.js'}
+        data-dsn={process.env.GATSBY_ELASTIC_BA_DSN}
+        defer
+      />
+      <CrawlerMetaTags pageType="job" data={job} />
+    </>
+  )
+}

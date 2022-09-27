@@ -1,6 +1,7 @@
 import React from "react"
 import Helmet from "react-helmet"
-import { graphql } from "gatsby"
+import { graphql, Script } from "gatsby"
+import CrawlerMetaTags from "../components/crawlerMetaTag"
 
 import JobLayout from "../components/jobLayout"
 import JobsList from "../components/jobsList"
@@ -54,3 +55,20 @@ export const query = graphql`
       }
     }
   }`
+
+export function Head({ data }) {
+  const agency = data.agency
+  console.log(agency)
+  return (
+    <>
+      <title>{agency.name} Jobs | NYC Jobs</title>
+      <Script
+        id="analytics"
+        src={'./analytics.js'}
+        data-dsn={process.env.GATSBY_ELASTIC_BA_DSN}
+        defer
+      />
+      <CrawlerMetaTags pageType="index_page" data={agency} />
+    </>
+  )
+}

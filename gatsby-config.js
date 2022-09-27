@@ -3,6 +3,7 @@ require("dotenv").config({
 })
 
 module.exports = {
+  pathPrefix: "/nyc-jobs-demo",
   siteMetadata: {
     title: `NYC Jobs`,
     siteUrl: `https://nyc-jobs-demo.vercel.app`
@@ -20,6 +21,8 @@ module.exports = {
         ignore: [`**/\.*`], // ignore files starting with a dot
       },
     },
-    `gatsby-plugin-sitemap`,
+    {
+      resolve: `gatsby-plugin-sitemap`,
+    }
   ]
 };

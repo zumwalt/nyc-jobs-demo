@@ -1,5 +1,5 @@
 import * as React from "react"
-import { graphql } from "gatsby"
+import { graphql, Script } from "gatsby"
 
 import JobLayout from "../components/jobLayout"
 import GridList from "../components/gridList"
@@ -33,3 +33,23 @@ export const query = graphql`
       }
     }
   }`
+
+export function Head({ data }) {
+  const categories = data.allCategoriesJson.edges
+  let categoriesList = []
+  categories.map(({ node }) => categoriesList.push(`"${node.name}"`))
+
+  return (
+    <>
+      <title>All Job Categories | NYC Jobs</title>
+      <Script
+        id="analytics"
+        src={'./analytics.js'}
+        data-dsn={process.env.GATSBY_ELASTIC_BA_DSN}
+        defer
+      />
+      <meta class="elastic" name="page_type" content="category_index" />
+      <meta class="elastic" name="page_data" content={`[${categoriesList}]`} />
+    </>
+  )
+}

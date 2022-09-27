@@ -11,6 +11,7 @@ import Footer from "../components/footer"
 
 import ElasticsearchAPIConnector from "@elastic/search-ui-elasticsearch-connector"
 import { SearchProvider, WithSearch, SearchBox } from "@elastic/react-search-ui"
+import AnalyticsPlugin from "@elastic/search-ui-analytics-plugin"
 
 const connector = new ElasticsearchAPIConnector({
   cloud: {
@@ -81,7 +82,8 @@ const config = {
     // }
   },
   apiConnector: connector,
-  alwaysSearchOnInitialLoad: true
+  alwaysSearchOnInitialLoad: true,
+  // plugins: [AnalyticsPlugin()]
 }
 
 const user = {
@@ -116,12 +118,6 @@ const AutocompleteItem = styled(Link)`
 export default function Layout({ children, title, breadcrumbs, showSearch }) {
   return (
     <SearchProvider config={config}>
-      <Script 
-        id="analytics" 
-        src={process.env.GATSBY_ELASTIC_BA_SCRIPT} 
-        data-dsn={process.env.GATSBY_ELASTIC_BA_DSN}
-        defer
-      />
       <Helmet htmlAttributes={{ class: 'h-full bg-white' }} bodyAttributes={{ class: 'h-full' }}>
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css"></link>
       </Helmet>

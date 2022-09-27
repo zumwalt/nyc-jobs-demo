@@ -15,10 +15,11 @@
     "clean": "gatsby clean"
   },
   "dependencies": {
-    "@elastic/react-search-ui": "^1.17.1",
-    "@elastic/react-search-ui-views": "^1.17.1",
-    "@elastic/search-ui": "^1.17.1",
-    "@elastic/search-ui-elasticsearch-connector": "^1.17.1",
+    "@elastic/react-search-ui": "^1.18.0",
+    "@elastic/react-search-ui-views": "^1.18.0",
+    "@elastic/search-ui": "^1.18.0",
+    "@elastic/search-ui-analytics-plugin": "^1.18.0",
+    "@elastic/search-ui-elasticsearch-connector": "^1.18.0",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
     "@headlessui/react": "^1.7.2",

@@ -10,11 +10,10 @@ export default function GridList({ path, items }) {
     <div className="divide-y divide-gray-200 overflow-hidden rounded-lg bg-gray-200 shadow sm:grid sm:grid-cols-2 sm:gap-px sm:divide-y-0">
       {items.map((item, itemsIdx) => {
         const {name, slug} = item.node
-        console.log(name, slug)
         const href = `/${path}/${slug}`
         return (
           <div
-            key={items.title}
+            key={itemsIdx}
             className={classNames(
               itemsIdx === 0 ? 'rounded-tl-lg rounded-tr-lg sm:rounded-tr-none' : '',
               itemsIdx === 1 ? 'sm:rounded-tr-lg' : '',
