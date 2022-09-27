@@ -1,15 +1,13 @@
 import React, { Fragment } from "react"
 import { navigate, Script, Link } from "gatsby"
 import styled from "@emotion/styled"
-import { css } from "@emotion/react"
 import Helmet from "react-helmet"
 import kebabCase from "lodash/kebabCase"
-import { Disclosure, Menu, Transition, Combobox, Dialog } from '@headlessui/react'
+import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 
 import Logo from "../components/logo"
 import Footer from "../components/footer"
-import SearchPalette from "../components/searchPalette"
 
 import ElasticsearchAPIConnector from "@elastic/search-ui-elasticsearch-connector"
 import { SearchProvider, WithSearch, SearchBox } from "@elastic/react-search-ui"
@@ -193,7 +191,6 @@ export default function Layout({ children, title, breadcrumbs, showSearch }) {
                                     <div className="px-6 py-4">
                                       <h2 className="text-xs font-medium mb-2 text-gray-500 uppercase tracking-widest">Results</h2>
                                       {autocompletedResults.map((result, i) => {
-                                        console.log(result)
                                         return (
                                           <AutocompleteItem
                                             to={`/jobs/${kebabCase(result.business_title.raw)}-${result.job_id.raw}`}

@@ -3,7 +3,7 @@ import { Link } from "gatsby"
 import kebabCase from "lodash/kebabCase"
 import PageLayout from "../components/pageLayout"
 import { WithSearch, Results, PagingInfo, ResultsPerPage, Paging } from "@elastic/react-search-ui"
-import { CalendarIcon, MapPinIcon, UsersIcon, ArrowLongLeftIcon, ArrowLongRightIcon } from '@heroicons/react/20/solid'
+import { CalendarIcon, UsersIcon, ArrowLongLeftIcon, ArrowLongRightIcon } from '@heroicons/react/20/solid'
 
 export default function SearchPage() {
   return (
