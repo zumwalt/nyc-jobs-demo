@@ -63,7 +63,7 @@ export function Head({ data }) {
       <title>{category.name} Jobs | NYC Jobs</title>
       <script
         id="analytics"
-        src={'/analytics.js'}
+        src={process.env.GATSBY_ELASTIC_BA_SCRIPT}
         data-dsn={process.env.GATSBY_ELASTIC_BA_DSN}
         defer
       />

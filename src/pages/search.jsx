@@ -31,7 +31,6 @@ const sortOptions = [
   },
 ]
 
-
 export default function SearchPage() {
   return (
     <JobLayout
@@ -90,7 +89,7 @@ export default function SearchPage() {
                                           <select
                                             id="show"
                                             name="show"
-                                            className="mt-1 block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                            className="mt-1 block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
                                             defaultValue={value}
                                             onChange={(e) => onChange(e.target.value)}
                                           >
@@ -119,7 +118,7 @@ export default function SearchPage() {
                             <Link to={`/jobs/${kebabCase(result.business_title.raw)}-${result.job_id.raw}`} className="block hover:bg-gray-50">
                               <div className="px-4 py-4 sm:px-6">
                                 <div className="flex items-center justify-between">
-                                  <p className="truncate text-md font-medium text-indigo-600" dangerouslySetInnerHTML={{ __html: result.business_title.snippet || result.business_title.raw }} />
+                                  <p className="truncate text-xl font-medium text-blue-600" dangerouslySetInnerHTML={{ __html: result.business_title.snippet || result.business_title.raw }} />
                                 </div>
                                 <div className="mt-2 sm:flex sm:justify-between">
                                   <div>
@@ -163,7 +162,7 @@ export function Head() {
       <title>Search Jobs | NYC Jobs</title>
       <script
         id="analytics"
-        src={'/analytics.js'}
+        src={process.env.GATSBY_ELASTIC_BA_SCRIPT}
         data-dsn={process.env.GATSBY_ELASTIC_BA_DSN}
         defer
       />
