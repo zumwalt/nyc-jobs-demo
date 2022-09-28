@@ -1,6 +1,6 @@
 import React from "react"
 import Helmet from "react-helmet"
-import { graphql, Script } from "gatsby"
+import { graphql } from "gatsby"
 import { ExclamationTriangleIcon, ArrowTopRightOnSquareIcon } from "@heroicons/react/20/solid"
 import kebabCase from "lodash/kebabCase"
 
@@ -18,7 +18,7 @@ export default function JobPage({ data }) {
   var moneyFormatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
-  });
+  })
 
   const PageTitle = () => (
     <>
@@ -191,12 +191,7 @@ export function Head({ data }) {
   return (
     <>
       <title>{job.business_title} Job Posting | NYC Jobs</title>
-      <script
-        id="analytics"
-        src={process.env.GATSBY_ELASTIC_BA_SCRIPT}
-        data-dsn={process.env.GATSBY_ELASTIC_BA_DSN}
-        defer
-      />
+      
       <CrawlerMetaTags pageType="job" data={job} />
     </>
   )

@@ -47,7 +47,7 @@ export default function NoResults({ searchTerm, setSearchTerm }) {
           <div className="mt-8">
             <a href="/" className="text-base font-medium text-blue-600 hover:text-blue-500">
               Or go back home
-              <span aria-hidden="true"> &rarr;</span>
+              <span aria-hidden="true"> &rarr</span>
             </a>
           </div>
         </div>

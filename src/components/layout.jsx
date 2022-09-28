@@ -1,26 +1,26 @@
-import React, { Fragment } from "react";
-import { navigate, Link } from "gatsby";
-import styled from "@emotion/styled";
-import Helmet from "react-helmet";
-import kebabCase from "lodash/kebabCase";
-import { Disclosure, Menu, Transition } from "@headlessui/react";
+import React, { Fragment } from "react"
+import { navigate, Link } from "gatsby"
+import styled from "@emotion/styled"
+import Helmet from "react-helmet"
+import kebabCase from "lodash/kebabCase"
+import { Disclosure, Menu, Transition } from "@headlessui/react"
 import {
   Bars3Icon,
   BellIcon,
   XMarkIcon,
   MagnifyingGlassIcon,
-} from "@heroicons/react/24/outline";
+} from "@heroicons/react/24/outline"
 
-import Logo from "../components/logo";
-import Footer from "../components/footer";
+import Logo from "../components/logo"
+import Footer from "../components/footer"
 
-import ElasticsearchAPIConnector from "@elastic/search-ui-elasticsearch-connector";
+import ElasticsearchAPIConnector from "@elastic/search-ui-elasticsearch-connector"
 import {
   SearchProvider,
   WithSearch,
   SearchBox,
-} from "@elastic/react-search-ui";
-// import AnalyticsPlugin from "@elastic/search-ui-analytics-plugin"
+} from "@elastic/react-search-ui"
+import AnalyticsPlugin from "@elastic/search-ui-analytics-plugin"
 
 const connector = new ElasticsearchAPIConnector({
   cloud: {
@@ -28,7 +28,7 @@ const connector = new ElasticsearchAPIConnector({
   },
   apiKey: process.env.GATSBY_ELASTIC_API_KEY,
   index: process.env.GATSBY_ELASTIC_INDEX_NAME,
-});
+})
 
 const config = {
   searchQuery: {
@@ -101,37 +101,37 @@ const config = {
   },
   apiConnector: connector,
   alwaysSearchOnInitialLoad: true,
-  // plugins: [AnalyticsPlugin()]
-};
+  plugins: [AnalyticsPlugin()]
+}
 
 const user = {
   name: "Tom Cook",
   email: "tom@example.com",
   imageUrl:
     "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-};
+}
 
 const navigation = [
   { name: "Agencies", href: "/agencies/", current: false },
   { name: "Categories", href: "/categories/", current: false },
-];
+]
 
 const userNavigation = [
   { name: "Your Profile", href: "#" },
   { name: "Settings", href: "#" },
   { name: "Sign out", href: "#" },
-];
+]
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
+  return classes.filter(Boolean).join(" ")
 }
 
 const AutocompleteItem = styled(Link)`
   em {
-    font-style: normal;
-    font-weight: 600;
+    font-style: normal
+    font-weight: 600
   }
-`;
+`
 
 export default function Layout({ children, showSearch }) {
   return (
@@ -196,12 +196,12 @@ export default function Layout({ children, showSearch }) {
                                 autocompleteSuggestions={true}
                                 debounceLength={0}
                                 onSubmit={(query) => {
-                                  navigate(`/search/?q=${query}`);
+                                  navigate(`/search/?q=${query}`)
                                 }}
                                 inputView={(props) => {
-                                  console.log(props);
+                                  console.log(props)
                                   const { getAutocomplete, getInputProps } =
-                                    props;
+                                    props
                                   return (
                                     <>
                                       <div className="sui-search-box__wrapper w-full">
@@ -224,7 +224,7 @@ export default function Layout({ children, showSearch }) {
                                         </div>
                                       </div>
                                     </>
-                                  );
+                                  )
                                 }}
                                 autocompleteView={({
                                   autocompletedResults,
@@ -259,12 +259,12 @@ export default function Layout({ children, showSearch }) {
                                                   }}
                                                 />
                                               </AutocompleteItem>
-                                            );
+                                            )
                                           }
                                         )}
                                       </div>
                                     </div>
-                                  );
+                                  )
                                 }}
                               />
                             </div>
@@ -407,9 +407,9 @@ export default function Layout({ children, showSearch }) {
         )}
       </WithSearch>
     </SearchProvider>
-  );
+  )
 }
 
 Layout.defaultProps = {
   showSearch: true,
-};
+}

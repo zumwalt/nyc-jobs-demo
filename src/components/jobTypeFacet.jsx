@@ -1,15 +1,15 @@
-import React from "react";
+import React from "react"
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
+  return classes.filter(Boolean).join(" ")
 }
 
 function valueToLabel(value) {
-  return value === "F" ? "Full Time Jobs" : "Part Time Jobs";
+  return value === "F" ? "Full Time Jobs" : "Part Time Jobs"
 }
 
 export default function JobTypeFacet(props) {
-  const { label, options, onRemove, onSelect } = props;
+  const { label, options, onRemove, onSelect } = props
 
   return (
     <fieldset className="mb-8">
@@ -37,5 +37,5 @@ export default function JobTypeFacet(props) {
         ))}
       </div>
     </fieldset>
-  );
+  )
 }

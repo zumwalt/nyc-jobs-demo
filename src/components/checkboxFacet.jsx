@@ -1,6 +1,7 @@
-import React from 'react';
-import { PlusIcon, FunnelIcon } from '@heroicons/react/20/solid';
-import pluralize from 'pluralize';
+import React from 'react'
+import kebabCase from 'lodash/kebabCase'
+import { PlusIcon, FunnelIcon } from '@heroicons/react/20/solid'
+import pluralize from 'pluralize'
 
 export default function CheckboxFacet(props) {
   const { 
@@ -34,7 +35,7 @@ export default function CheckboxFacet(props) {
                 className="block w-full rounded-md border-gray-300 pl-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                 placeholder={`Filter ${pluralize(label)}...`}
                 onChange={(e) => {
-                  onSearch(e.target.value);
+                  onSearch(e.target.value)
                 }}
               />
             </div>
@@ -45,8 +46,8 @@ export default function CheckboxFacet(props) {
             <div key={optionIdx} className="relative flex items-start py-4">
               <div className="ml-3 flex h-5 items-center">
                 <input
-                  id={`option-${optionIdx}`}
-                  name={`option-${optionIdx}`}
+                  id={`option-${kebabCase(label)}-${optionIdx}`}
+                  name={`option-${kebabCase(label)}-${optionIdx}`}
                   type="checkbox"
                   className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                   checked={option.selected}
@@ -75,5 +76,5 @@ export default function CheckboxFacet(props) {
         }
       </fieldset>
     </>
-  );
+  )
 }

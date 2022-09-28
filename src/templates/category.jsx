@@ -1,6 +1,6 @@
 import React from "react"
 import Helmet from "react-helmet"
-import { graphql, Script } from "gatsby"
+import { graphql } from "gatsby"
 
 import CrawlerMetaTags from "../components/crawlerMetaTag"
 import JobLayout from "../components/jobLayout"
@@ -61,12 +61,7 @@ export function Head({ data }) {
   return (
     <>
       <title>{category.name} Jobs | NYC Jobs</title>
-      <script
-        id="analytics"
-        src={process.env.GATSBY_ELASTIC_BA_SCRIPT}
-        data-dsn={process.env.GATSBY_ELASTIC_BA_DSN}
-        defer
-      />
+      
       <CrawlerMetaTags pageType="index_page" data={category} />
     </>
   )
