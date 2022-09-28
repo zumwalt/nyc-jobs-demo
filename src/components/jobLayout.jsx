@@ -4,10 +4,10 @@ import Helmet from "react-helmet"
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline'
 import { ChevronRightIcon, HomeIcon } from '@heroicons/react/20/solid'
 
-export default function JobLayout({ children, title, breadcrumbs }) {
+export default function JobLayout({ children, title, breadcrumbs, showSearch }) {
   return (
-    <Layout>
-      <Helmet htmlAttributes={{ class: 'h-full bg-gray-100' }} bodyAttributes={{ class: 'h-full' }} />
+    <Layout showSearch={showSearch}>
+      <Helmet htmlAttributes={{ class: 'h-full bg-gray-50' }} bodyAttributes={{ class: 'h-full' }} />
       <header className="bg-white shadow">
         {breadcrumbs && (
           <div className="mx-auto max-w-7xl pt-6 px-4 sm:px-6 lg:px-8">

@@ -3,7 +3,6 @@ import { PlusIcon, FunnelIcon } from '@heroicons/react/20/solid';
 import pluralize from 'pluralize';
 
 export default function CheckboxFacet(props) {
-  console.log(props)
   const { 
     label, 
     options, 
@@ -41,7 +40,7 @@ export default function CheckboxFacet(props) {
             </div>
           </div>
         }
-        <div className="mt-4 divide-y divide-gray-200 border-t border-b border-gray-200">
+        <div className="mt-4 divide-y divide-gray-200 border-t border-gray-200">
           {options.map((option, optionIdx) => (
             <div key={optionIdx} className="relative flex items-start py-4">
               <div className="ml-3 flex h-5 items-center">

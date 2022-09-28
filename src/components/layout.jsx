@@ -1,78 +1,96 @@
-import React, { Fragment } from "react"
-import { navigate, Script, Link } from "gatsby"
-import styled from "@emotion/styled"
-import Helmet from "react-helmet"
-import kebabCase from "lodash/kebabCase"
-import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline'
+import React, { Fragment } from "react";
+import { navigate, Link } from "gatsby";
+import styled from "@emotion/styled";
+import Helmet from "react-helmet";
+import kebabCase from "lodash/kebabCase";
+import { Disclosure, Menu, Transition } from "@headlessui/react";
+import {
+  Bars3Icon,
+  BellIcon,
+  XMarkIcon,
+  MagnifyingGlassIcon,
+} from "@heroicons/react/24/outline";
 
-import Logo from "../components/logo"
-import Footer from "../components/footer"
+import Logo from "../components/logo";
+import Footer from "../components/footer";
 
-import ElasticsearchAPIConnector from "@elastic/search-ui-elasticsearch-connector"
-import { SearchProvider, WithSearch, SearchBox } from "@elastic/react-search-ui"
-import AnalyticsPlugin from "@elastic/search-ui-analytics-plugin"
+import ElasticsearchAPIConnector from "@elastic/search-ui-elasticsearch-connector";
+import {
+  SearchProvider,
+  WithSearch,
+  SearchBox,
+} from "@elastic/react-search-ui";
+// import AnalyticsPlugin from "@elastic/search-ui-analytics-plugin"
 
 const connector = new ElasticsearchAPIConnector({
   cloud: {
-    id: process.env.GATSBY_ELASTIC_CLOUD_ID
+    id: process.env.GATSBY_ELASTIC_CLOUD_ID,
   },
   apiKey: process.env.GATSBY_ELASTIC_API_KEY,
-  index: process.env.GATSBY_ELASTIC_INDEX_NAME
-})
+  index: process.env.GATSBY_ELASTIC_INDEX_NAME,
+});
 
 const config = {
   searchQuery: {
     search_fields: {
       business_title: {
-        weight: 3
+        weight: 3,
       },
     },
     result_fields: {
       business_title: {
         snippet: {},
-        raw: {}
+        raw: {},
       },
       agency: {
-        snippet: {}
+        snippet: {},
       },
       job_id: {
-        raw: {}
+        raw: {},
       },
       posting_date: {
-        raw: {}
+        raw: {},
       },
       category: {
-        raw: {}
-      }
+        raw: {},
+      },
+      divison_work_unit: {
+        raw: {},
+      },
     },
-    disjunctiveFacets: ["category.keyword","agency.keyword","division_work_unit.keyword"],
+    disjunctiveFacets: [
+      "category.keyword",
+      "agency.keyword",
+      "division_work_unit.keyword",
+      "full_time_part_time_indicator.keyword",
+    ],
     facets: {
       "category.keyword": { type: "value" },
       "agency.keyword": { type: "value" },
-      "divison_work_unit.keyword": { type: "value" }
-    }
+      "divison_work_unit.keyword": { type: "value" },
+      "full_time_part_time_indicator.keyword": { type: "value" },
+    },
   },
   autocompleteQuery: {
     results: {
       resultsPerPage: 5,
       search_fields: {
         "business_title.suggest": {
-          weight: 3
-        }
+          weight: 3,
+        },
       },
       result_fields: {
         business_title: {
           snippet: {
             size: 100,
-            fallback: true
+            fallback: true,
           },
-          raw: {}
+          raw: {},
         },
         job_id: {
-          raw: {}
-        }
-      }
+          raw: {},
+        },
+      },
     },
     // suggestions: {
     //   types: {
@@ -84,28 +102,28 @@ const config = {
   apiConnector: connector,
   alwaysSearchOnInitialLoad: true,
   // plugins: [AnalyticsPlugin()]
-}
+};
 
 const user = {
-  name: 'Tom Cook',
-  email: 'tom@example.com',
+  name: "Tom Cook",
+  email: "tom@example.com",
   imageUrl:
-    'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-}
+    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+};
 
 const navigation = [
-  { name: 'Agencies', href: '/agencies/', current: false },
-  { name: 'Categories', href: '/categories/', current: false },
-]
+  { name: "Agencies", href: "/agencies/", current: false },
+  { name: "Categories", href: "/categories/", current: false },
+];
 
 const userNavigation = [
-  { name: 'Your Profile', href: '#' },
-  { name: 'Settings', href: '#' },
-  { name: 'Sign out', href: '#' },
-]
+  { name: "Your Profile", href: "#" },
+  { name: "Settings", href: "#" },
+  { name: "Sign out", href: "#" },
+];
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(" ");
 }
 
 const AutocompleteItem = styled(Link)`
@@ -113,12 +131,15 @@ const AutocompleteItem = styled(Link)`
     font-style: normal;
     font-weight: 600;
   }
-`
+`;
 
-export default function Layout({ children, title, breadcrumbs, showSearch }) {
+export default function Layout({ children, showSearch }) {
   return (
     <SearchProvider config={config}>
-      <Helmet htmlAttributes={{ class: 'h-full bg-white' }} bodyAttributes={{ class: 'h-full' }}>
+      <Helmet
+        htmlAttributes={{ class: "h-full bg-white" }}
+        bodyAttributes={{ class: "h-full" }}
+      >
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css"></link>
       </Helmet>
       <WithSearch mapContextToProps={({ wasSearched }) => ({ wasSearched })}>
@@ -134,7 +155,9 @@ export default function Layout({ children, title, breadcrumbs, showSearch }) {
                           <div className="flex-shrink-0">
                             <a href="/" className="flex items-center">
                               <Logo />
-                              <span className="text-white text-3xl ml-4">Jobs</span>
+                              <span className="text-white text-3xl ml-4">
+                                Jobs
+                              </span>
                             </a>
                           </div>
                           <div className="hidden md:block">
@@ -145,85 +168,125 @@ export default function Layout({ children, title, breadcrumbs, showSearch }) {
                                   href={item.href}
                                   className={classNames(
                                     item.current
-                                      ? 'bg-blue-600 text-white'
-                                      : 'text-white hover:bg-blue-700 hover:text-white',
-                                    'px-3 py-2 rounded-md text-sm font-medium'
+                                      ? "bg-blue-600 text-white"
+                                      : "text-white hover:bg-blue-700 hover:text-white",
+                                    "px-3 py-2 rounded-md text-sm font-medium"
                                   )}
-                                  aria-current={item.current ? 'page' : undefined}
+                                  aria-current={
+                                    item.current ? "page" : undefined
+                                  }
                                 >
                                   {item.name}
                                 </a>
                               ))}
                             </div>
                           </div>
-                          <div className="ml-4 w-full">
-                            <SearchBox
-                              className="w-full"
-                              autocompleteMinimumCharacters={3}
-                              autocompleteResults={{
-                                linkTarget: "_blank",
-                                sectionTitle: "Results",
-                                titleField: "business_title",
-                                urlField: "url",
-                                shouldTrackClickThrough: true
-                              }}
-                              autocompleteSuggestions={true}
-                              debounceLength={0}
-                              onSubmit={(query) => {
-                                navigate(`/search/?q=${query}`)
-                              }}
-                              inputView={({ getAutocomplete, getInputProps }) => (
-                                <>
-                                  <div className="sui-search-box__wrapper w-full">
-                                    <div className="relative mt-1 rounded-md shadow-sm">
-                                      <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                        <MagnifyingGlassIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
-                                      </div>
-                                      <input type="text"
-                                        {...getInputProps({
-                                          className: "block w-full rounded-md border-gray-300 pl-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm",
-                                          placeholder: "Search NYC Jobs...",
-                                        })}
-                                      />
-                                      {getAutocomplete()}
-                                    </div>
-                                  </div>
-                                </>
-                              )}
-                              autocompleteView={({ autocompletedResults, getItemProps }) => {
-                                return (
-                                  <div className="absolute top-[110%] left-0 right-0 overflow-hidden rounded-lg bg-white shadow-2xl z-50">
-                                    <div className="px-6 py-4">
-                                      <h2 className="text-xs font-medium mb-2 text-gray-500 uppercase tracking-widest">Results</h2>
-                                      {autocompletedResults.map((result, i) => {
-                                        return (
-                                          <AutocompleteItem
-                                            to={`/jobs/${kebabCase(result.business_title.raw)}-${result.job_id.raw}`}
-                                            {...getItemProps({
-                                              key: result.job_id.raw,
-                                              item: result,
-                                              className: "block p-2 -mx-2 rounded hover:text-blue-600 hover:bg-blue-100"
+                          {showSearch && (
+                            <div className="ml-4 w-full">
+                              <SearchBox
+                                className="w-full"
+                                autocompleteMinimumCharacters={3}
+                                autocompleteResults={{
+                                  linkTarget: "_blank",
+                                  sectionTitle: "Results",
+                                  titleField: "business_title",
+                                  urlField: "url",
+                                  shouldTrackClickThrough: true,
+                                }}
+                                autocompleteSuggestions={true}
+                                debounceLength={0}
+                                onSubmit={(query) => {
+                                  navigate(`/search/?q=${query}`);
+                                }}
+                                inputView={(props) => {
+                                  console.log(props);
+                                  const { getAutocomplete, getInputProps } =
+                                    props;
+                                  return (
+                                    <>
+                                      <div className="sui-search-box__wrapper w-full">
+                                        <div className="relative mt-1 rounded-md shadow-sm">
+                                          <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                            <MagnifyingGlassIcon
+                                              className="h-5 w-5 text-gray-400"
+                                              aria-hidden="true"
+                                            />
+                                          </div>
+                                          <input
+                                            type="text"
+                                            {...getInputProps({
+                                              className:
+                                                "block w-full rounded-md border-gray-300 pl-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm",
+                                              placeholder: "Search NYC Jobs...",
                                             })}
-                                          >
-                                            <span dangerouslySetInnerHTML={{ __html: result.business_title.snippet || result.business_title.raw }} />
-                                          </AutocompleteItem>
-                                        )
-                                      })}
+                                          />
+                                          {getAutocomplete()}
+                                        </div>
+                                      </div>
+                                    </>
+                                  );
+                                }}
+                                autocompleteView={({
+                                  autocompletedResults,
+                                  getItemProps,
+                                }) => {
+                                  return (
+                                    <div className="absolute top-[110%] left-0 right-0 overflow-hidden rounded-lg bg-white shadow-2xl z-50">
+                                      <div className="px-6 py-4">
+                                        <h2 className="text-xs font-medium mb-2 text-gray-500 uppercase tracking-widest">
+                                          Results
+                                        </h2>
+                                        {autocompletedResults.map(
+                                          (result, i) => {
+                                            return (
+                                              <AutocompleteItem
+                                                to={`/jobs/${kebabCase(
+                                                  result.business_title.raw
+                                                )}-${result.job_id.raw}`}
+                                                {...getItemProps({
+                                                  key: result.job_id.raw,
+                                                  item: result,
+                                                  className:
+                                                    "block p-2 -mx-2 rounded hover:text-blue-600 hover:bg-blue-100",
+                                                })}
+                                              >
+                                                <span
+                                                  dangerouslySetInnerHTML={{
+                                                    __html:
+                                                      result.business_title
+                                                        .snippet ||
+                                                      result.business_title.raw,
+                                                  }}
+                                                />
+                                              </AutocompleteItem>
+                                            );
+                                          }
+                                        )}
+                                      </div>
                                     </div>
-                                  </div>
-                                )
-                              }}
-                            />
-                          </div>
+                                  );
+                                }}
+                              />
+                            </div>
+                          )}
                         </div>
                         <div className="hidden md:block">
                           <div className="ml-4 flex items-center md:ml-6">
                             {/* Profile dropdown */}
-                            <Menu as="div" className="relative ml-3 flex-shrink-0">
+                            <Menu
+                              as="div"
+                              className="relative ml-3 flex-shrink-0"
+                            >
                               <div>
                                 <Menu.Button className="flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                                  <span className="sr-only">Open user menu</span>
-                                  <img className="h-8 w-8 rounded-full" src={user.imageUrl} alt="" />
+                                  <span className="sr-only">
+                                    Open user menu
+                                  </span>
+                                  <img
+                                    className="h-8 w-8 rounded-full"
+                                    src={user.imageUrl}
+                                    alt=""
+                                  />
                                 </Menu.Button>
                               </div>
                               <Transition
@@ -242,8 +305,8 @@ export default function Layout({ children, title, breadcrumbs, showSearch }) {
                                         <a
                                           href={item.href}
                                           className={classNames(
-                                            active ? 'bg-gray-100' : '',
-                                            'block px-4 py-2 text-sm text-gray-700'
+                                            active ? "bg-gray-100" : "",
+                                            "block px-4 py-2 text-sm text-gray-700"
                                           )}
                                         >
                                           {item.name}
@@ -261,9 +324,15 @@ export default function Layout({ children, title, breadcrumbs, showSearch }) {
                           <Disclosure.Button className="inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                             <span className="sr-only">Open main menu</span>
                             {open ? (
-                              <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
+                              <XMarkIcon
+                                className="block h-6 w-6"
+                                aria-hidden="true"
+                              />
                             ) : (
-                              <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
+                              <Bars3Icon
+                                className="block h-6 w-6"
+                                aria-hidden="true"
+                              />
                             )}
                           </Disclosure.Button>
                         </div>
@@ -278,10 +347,12 @@ export default function Layout({ children, title, breadcrumbs, showSearch }) {
                             as="a"
                             href={item.href}
                             className={classNames(
-                              item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                              'block px-3 py-2 rounded-md text-base font-medium'
+                              item.current
+                                ? "bg-gray-900 text-white"
+                                : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                              "block px-3 py-2 rounded-md text-base font-medium"
                             )}
-                            aria-current={item.current ? 'page' : undefined}
+                            aria-current={item.current ? "page" : undefined}
                           >
                             {item.name}
                           </Disclosure.Button>
@@ -290,11 +361,19 @@ export default function Layout({ children, title, breadcrumbs, showSearch }) {
                       <div className="border-t border-gray-700 pt-4 pb-3">
                         <div className="flex items-center px-5">
                           <div className="flex-shrink-0">
-                            <img className="h-10 w-10 rounded-full" src={user.imageUrl} alt="" />
+                            <img
+                              className="h-10 w-10 rounded-full"
+                              src={user.imageUrl}
+                              alt=""
+                            />
                           </div>
                           <div className="ml-3">
-                            <div className="text-base font-medium leading-none text-white">{user.name}</div>
-                            <div className="text-sm font-medium leading-none text-gray-400">{user.email}</div>
+                            <div className="text-base font-medium leading-none text-white">
+                              {user.name}
+                            </div>
+                            <div className="text-sm font-medium leading-none text-gray-400">
+                              {user.email}
+                            </div>
                           </div>
                           <button
                             type="button"
@@ -328,9 +407,9 @@ export default function Layout({ children, title, breadcrumbs, showSearch }) {
         )}
       </WithSearch>
     </SearchProvider>
-  )
+  );
 }
 
 Layout.defaultProps = {
   showSearch: true,
-}
+};

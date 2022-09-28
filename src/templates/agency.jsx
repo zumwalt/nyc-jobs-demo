@@ -58,13 +58,12 @@ export const query = graphql`
 
 export function Head({ data }) {
   const agency = data.agency
-  console.log(agency)
   return (
     <>
       <title>{agency.name} Jobs | NYC Jobs</title>
-      <Script
+      <script
         id="analytics"
-        src={'./analytics.js'}
+        src={'/analytics.js'}
         data-dsn={process.env.GATSBY_ELASTIC_BA_DSN}
         defer
       />

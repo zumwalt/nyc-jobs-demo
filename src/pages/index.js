@@ -18,9 +18,9 @@ export function Head() {
   return (
     <>
       <title>NYC Jobs</title>
-      <Script
+      <script
         id="analytics"
-        src={'./analytics.js'}
+        src={'/analytics.js'}
         data-dsn={process.env.GATSBY_ELASTIC_BA_DSN}
         defer
       />

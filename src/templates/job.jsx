@@ -9,7 +9,6 @@ import JobLayout from "../components/jobLayout"
 
 export default function JobPage({ data }) {
   const job = data.jobsJson
-  console.log(job)
 
   const breadcrumbs = [
     job?.agency && { name: job.agency, href: `/agency/${kebabCase(job.agency)}`, current: false },
@@ -192,9 +191,9 @@ export function Head({ data }) {
   return (
     <>
       <title>{job.business_title} Job Posting | NYC Jobs</title>
-      <Script
+      <script
         id="analytics"
-        src={'./analytics.js'}
+        src={'/analytics.js'}
         data-dsn={process.env.GATSBY_ELASTIC_BA_DSN}
         defer
       />

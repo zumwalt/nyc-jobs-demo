@@ -21,7 +21,6 @@ function classNames(...classes) {
 }
 
 export default function SortControl(props) {
-  console.log(props)
   const { label, options, onChange, value } = props
 
   const selected = options.find((option) => option.value === value)
