@@ -11,6 +11,7 @@ import JobTypeFacet from "../components/jobTypeFacet"
 import SearchInput from "../components/searchInput"
 import NoResults from "../components/noResults"
 import Pagination from "../components/pagination"
+import { niceDate } from "../utils/helpers"
 
 const sortOptions = [
   {
@@ -72,7 +73,7 @@ export default function SearchPage() {
                                   <PagingInfo
                                     view={({ searchTerm, start, end, totalResults }) => (
                                       <h3 className="text-lg font-medium leading-6 text-gray-900">
-                                        Showing <strong>{start} - {end}</strong> of {totalResults} results {searchTerm && <>for <span className="font-semibold">{searchTerm}</span></>}
+                                        Showing {totalResults > end && <><strong>{start} - {end}</strong> of </>}{totalResults} results {searchTerm && <>for <span className="font-bold">{searchTerm}</span></>}
                                       </h3>
                                     )}
                                   />
@@ -134,7 +135,7 @@ export default function SearchPage() {
                                     </p>}
                                     <p className="mt-2 flex items-center text-sm text-gray-500">
                                       <CalendarIcon className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
-                                      Posted <time dateTime={result.posting_date.raw}>{result.posting_date.raw}</time>
+                                      Posted&nbsp;<time dateTime={result.posting_date.raw}>{niceDate(result.posting_date.raw)}</time>
                                     </p>
                                   </div>
                                 </div>
@@ -142,7 +143,6 @@ export default function SearchPage() {
                             </Link>
                           </li>
                         )
-
                       }}
                     />
                     <Paging view={(props) => props.totalPages > 1 && <Pagination totalResults={totalResults} setCurrent={setCurrent} {...props} />} />
